@@ -5,16 +5,26 @@ const typeDefs = importSchema("./schema.graphql");
 
 require("dotenv").config();
 
+// Code comments inserted
 const resolvers = {
   Query: {
-    getEthByAddress: (root, _args, { dataSources }) =>
+    // Returns ether balance for a given address
+    etherBalanceByAddress: (root, _args, { dataSources }) =>
       dataSources.ethDataSource.etherBalanceByAddress(),
-    getTotalSupplyEth: (root, _args, { dataSources }) =>
+
+    // Returns total supply of ether
+    totalSupplyOfEther: (root, _args, { dataSources }) =>
       dataSources.ethDataSource.totalSupplyOfEther(),
-    //Paste Code for New Resolver Functions
+
+    // Returns latest ethereum price
+    latestEthereumPrice: (root, _args, { dataSources }) =>
+      dataSources.ethDataSource.getLatestEthereumPrice(),
+
+    // Returns block confirmation time
+    blockConfirmationTime: (root, _args, { dataSources }) =>
+      dataSources.ethDataSource.getBlockConfirmationTime(),
   },
 };
-
 const server = new ApolloServer({
   typeDefs,
   resolvers,

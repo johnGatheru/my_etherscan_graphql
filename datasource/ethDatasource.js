@@ -11,18 +11,32 @@ class EtherDataSource extends RESTDataSource {
   }
 
   async etherBalanceByAddress() {
+    // Returns ether balance for a given address
     return this.get(
       `?module=account&action=balance&address=${eth_address}&tag=latest&apikey=${process.env.ETHERSCAN_API}`
     );
   }
 
   async totalSupplyOfEther() {
+    // Returns total supply of ether
     return this.get(
       `?module=stats&action=ethsupply&apikey=${process.env.ETHERSCAN_API}`
     );
   }
 
-  //Paste Code Here For New API Endpoints
+  async getLatestEthereumPrice() {
+    // Returns latest ethereum price
+    return this.get(
+      `?module=stats&action=ethprice&apikey=${process.env.ETHERSCAN_API}`
+    );
+  }
+
+  async getBlockConfirmationTime() {
+    // Returns block confirmation time
+    return this.get(
+      `?module=gastracker&action=gasestimate&gasprice=2000000000&apikey=${process.env.ETHERSCAN_API}`
+    );
+  }
 }
 
 module.exports = EtherDataSource;
